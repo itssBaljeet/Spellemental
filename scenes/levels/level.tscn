@@ -1,0 +1,236 @@
+[gd_scene load_steps=13 format=3 uid="uid://do043bihp214l"]
+
+[ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_s1y56"]
+[ext_resource type="PackedScene" uid="uid://badk3r16foj3o" path="res://scenes/player/player.tscn" id="2_4wdr5"]
+[ext_resource type="Texture2D" uid="uid://djipoglyq4b2o" path="res://graphics/projectiles/health.png" id="4_0yloh"]
+[ext_resource type="PackedScene" uid="uid://bo63e7s60j085" path="res://scenes/player/hands.tscn" id="4_hegrm"]
+[ext_resource type="Texture2D" uid="uid://dh41cf354ceyd" path="res://graphics/projectiles/mana_bar.png" id="5_3rqgj"]
+[ext_resource type="Texture2D" uid="uid://c1xonnvf60dlq" path="res://graphics/objects/coin_ui.png" id="6_8axj7"]
+[ext_resource type="Texture2D" uid="uid://cw6edov8q5dmw" path="res://graphics/ui/pause_menu.png" id="7_nngy3"]
+[ext_resource type="Texture2D" uid="uid://f6ad6pdirqp7" path="res://graphics/ui/button.png" id="8_lmcpl"]
+[ext_resource type="Texture2D" uid="uid://dhuv1e2fo8jlb" path="res://graphics/ui/button_pressed.png" id="9_jc230"]
+[ext_resource type="Texture2D" uid="uid://cjix8os68mg0f" path="res://graphics/ui/button_hover.png" id="10_bbp4f"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vth0v"]
+font_size = 60
+
+[sub_resource type="LabelSettings" id="LabelSettings_6lhv8"]
+font_size = 23
+font_color = Color(0, 0, 0, 1)
+outline_size = 1
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_s1y56")
+
+[node name="GameHelper" type="Node" parent="."]
+
+[node name="Ground" type="Node2D" parent="."]
+
+[node name="Items" type="Node2D" parent="."]
+
+[node name="Projectiles" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("2_4wdr5")]
+position = Vector2(953, 536)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(4, 4)
+position_smoothing_enabled = true
+
+[node name="Hands2" parent="." instance=ExtResource("4_hegrm")]
+position = Vector2(953, 536)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Player_Stats" type="HBoxContainer" parent="UI/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="Hitpoints" type="BoxContainer" parent="UI/VBoxContainer/Player_Stats"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="TextureRect" type="TextureRect" parent="UI/VBoxContainer/Player_Stats/Hitpoints"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_0yloh")
+expand_mode = 2
+stretch_mode = 6
+
+[node name="Mana_Bar" type="BoxContainer" parent="UI/VBoxContainer/Player_Stats"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="TextureRect" type="TextureRect" parent="UI/VBoxContainer/Player_Stats/Mana_Bar"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("5_3rqgj")
+expand_mode = 2
+
+[node name="Resources" type="HBoxContainer" parent="UI/VBoxContainer"]
+layout_mode = 2
+
+[node name="Buffer" type="BoxContainer" parent="UI/VBoxContainer/Resources"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+
+[node name="Coin_Counter" type="BoxContainer" parent="UI/VBoxContainer/Resources"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="UI/VBoxContainer/Resources/Coin_Counter"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("6_8axj7")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="UI/VBoxContainer/Resources/Coin_Counter"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 1
+text = "1"
+label_settings = SubResource("LabelSettings_vth0v")
+horizontal_alignment = 1
+
+[node name="Main_Screen" type="HBoxContainer" parent="UI/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PauseMenu" type="CanvasLayer" parent="."]
+process_mode = 2
+visible = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PauseMenu"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/HBoxContainer"]
+custom_minimum_size = Vector2(333, 0)
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PauseMenu/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="PauseMenu/HBoxContainer/VBoxContainer2"]
+texture_filter = 1
+custom_minimum_size = Vector2(560, 896)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+texture = ExtResource("7_nngy3")
+
+[node name="Button_Holder" type="VBoxContainer" parent="PauseMenu/HBoxContainer/VBoxContainer2/TextureRect"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.182
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Resume Button" type="TextureButton" parent="PauseMenu/HBoxContainer/VBoxContainer2/TextureRect/Button_Holder"]
+custom_minimum_size = Vector2(240, 110)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("8_lmcpl")
+texture_pressed = ExtResource("9_jc230")
+texture_hover = ExtResource("10_bbp4f")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="PauseMenu/HBoxContainer/VBoxContainer2/TextureRect/Button_Holder/Resume Button"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Resume"
+label_settings = SubResource("LabelSettings_6lhv8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton2" type="TextureButton" parent="PauseMenu/HBoxContainer/VBoxContainer2/TextureRect/Button_Holder"]
+custom_minimum_size = Vector2(240, 110)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("8_lmcpl")
+texture_pressed = ExtResource("9_jc230")
+texture_hover = ExtResource("10_bbp4f")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton3" type="TextureButton" parent="PauseMenu/HBoxContainer/VBoxContainer2/TextureRect/Button_Holder"]
+custom_minimum_size = Vector2(240, 110)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("8_lmcpl")
+texture_pressed = ExtResource("9_jc230")
+texture_hover = ExtResource("10_bbp4f")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton4" type="TextureButton" parent="PauseMenu/HBoxContainer/VBoxContainer2/TextureRect/Button_Holder"]
+custom_minimum_size = Vector2(240, 110)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("8_lmcpl")
+texture_pressed = ExtResource("9_jc230")
+texture_hover = ExtResource("10_bbp4f")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton5" type="TextureButton" parent="PauseMenu/HBoxContainer/VBoxContainer2/TextureRect/Button_Holder"]
+custom_minimum_size = Vector2(240, 110)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("8_lmcpl")
+texture_pressed = ExtResource("9_jc230")
+texture_hover = ExtResource("10_bbp4f")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="PauseMenu/HBoxContainer"]
+custom_minimum_size = Vector2(333, 0)
+layout_mode = 2
+
+[connection signal="handpos" from="Player" to="Player/Camera2D" method="_on_player_handpos"]
+[connection signal="handpos" from="Player" to="Hands2" method="_on_player_handpos"]
+[connection signal="hands" from="Player" to="Hands2" method="_on_player_hands"]
+[connection signal="mouse_entered" from="Player" to="Hands2" method="_on_player_mouse_entered"]
+[connection signal="mouse_exited" from="Player" to="Hands2" method="_on_player_mouse_exited"]
+[connection signal="secondSpell_input" from="Player" to="." method="_on_player_second_spell_input"]
+[connection signal="spell_input" from="Player" to="." method="_on_player_spell_input"]
+[connection signal="markPos" from="Hands2" to="Player" method="_on_hands_2_mark_pos"]
+[connection signal="rad_exceed" from="Hands2" to="Player" method="_on_hands_2_rad_exceed"]
+[connection signal="pressed" from="PauseMenu/HBoxContainer/VBoxContainer2/TextureRect/Button_Holder/Resume Button" to="." method="_on_resume_button_pressed"]
