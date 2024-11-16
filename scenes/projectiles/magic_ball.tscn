@@ -1,0 +1,92 @@
+[gd_scene load_steps=14 format=3 uid="uid://b7gro128ccpt7"]
+
+[ext_resource type="Texture2D" uid="uid://lpngyg7623sy" path="res://graphics/projectiles/magic_ball.png" id="1_duxy3"]
+[ext_resource type="Script" path="res://scenes/projectiles/magic_ball.gd" id="1_jdvqj"]
+[ext_resource type="Texture2D" uid="uid://bfh86upqyayxm" path="res://graphics/projectiles/sprite_sheet_explosion_fx.png" id="3_1ocjn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_waypy"]
+radius = 4.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fwild"]
+atlas = ExtResource("3_1ocjn")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s0bxn"]
+atlas = ExtResource("3_1ocjn")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qu2n3"]
+atlas = ExtResource("3_1ocjn")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1i72n"]
+atlas = ExtResource("3_1ocjn")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_po23p"]
+atlas = ExtResource("3_1ocjn")
+region = Rect2(64, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_72ei3"]
+atlas = ExtResource("3_1ocjn")
+region = Rect2(80, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m0wjr"]
+atlas = ExtResource("3_1ocjn")
+region = Rect2(96, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yfn8x"]
+atlas = ExtResource("3_1ocjn")
+region = Rect2(112, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qu1i4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fwild")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s0bxn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qu2n3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1i72n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_po23p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_72ei3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m0wjr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yfn8x")
+}],
+"loop": false,
+"name": &"default",
+"speed": 15.0
+}]
+
+[node name="Magic Ball" type="Area2D"]
+z_index = 2
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_jdvqj")
+speed = 250
+
+[node name="Ball Sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_duxy3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_waypy")
+
+[node name="ExplosionAnimation" type="AnimatedSprite2D" parent="."]
+visible = false
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_qu1i4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
