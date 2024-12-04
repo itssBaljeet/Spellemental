@@ -20,10 +20,15 @@ func _process(delta):
 		var cursorVector = dir * 50
 		var finalPos = playerPos + cursorVector
 		position = mouse_pos
+		
 		# (playerPos - mouse_pos).length >  
 		if (playerPos.distance_to(mouse_pos) > cursorVector.length()):
+			$".".look_at(mouse_pos)
 			rad_exceed.emit(finalPos)
 			position = finalPos
+		else:
+			# Make hands point outwards when using grab
+			$".".look_at(finalPos)
 	else:
 		position = playerPos
 

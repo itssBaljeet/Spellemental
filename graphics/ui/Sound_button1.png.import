@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djipoglyq4b2o"
-path="res://.godot/imported/health.png-b6f11ad031c10fd723cf41138dd0a244.ctex"
+uid="uid://nysjft63rhlg"
+path="res://.godot/imported/Sound_button1.png-aa0b57e887cbb6a84c633afaf57ea8cd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/projectiles/health.png"
-dest_files=["res://.godot/imported/health.png-b6f11ad031c10fd723cf41138dd0a244.ctex"]
+source_file="res://graphics/ui/Sound_button1.png"
+dest_files=["res://.godot/imported/Sound_button1.png-aa0b57e887cbb6a84c633afaf57ea8cd.ctex"]
 
 [params]
 

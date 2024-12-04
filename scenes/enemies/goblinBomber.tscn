@@ -1,0 +1,75 @@
+[gd_scene load_steps=11 format=3 uid="uid://dtaxfaji43yb4"]
+
+[ext_resource type="Texture2D" uid="uid://ds03kgiepcecr" path="res://graphics/enemies/GoblinBomberSpriteSheet1.png" id="1_vndlf"]
+[ext_resource type="Script" path="res://components/HitboxComponent.gd" id="2_5i0qd"]
+[ext_resource type="Script" path="res://components/HealthComponent.gd" id="3_uoy3u"]
+[ext_resource type="Script" path="res://components/DamageFlashComponent.gd" id="4_do3b2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qk8q6"]
+atlas = ExtResource("1_vndlf")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6lx6t"]
+atlas = ExtResource("1_vndlf")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jus4y"]
+atlas = ExtResource("1_vndlf")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8kv45"]
+atlas = ExtResource("1_vndlf")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hx332"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qk8q6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6lx6t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jus4y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8kv45")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0p85k"]
+radius = 7.0
+
+[node name="GoblinBomber" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_hx332")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.298428
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, 3)
+shape = SubResource("CapsuleShape2D_0p85k")
+
+[node name="HitBoxComponent" type="Area2D" parent="." node_paths=PackedStringArray("healthComponent", "damageFlashComponent")]
+collision_layer = 2
+collision_mask = 9
+script = ExtResource("2_5i0qd")
+healthComponent = NodePath("../HealthComponent")
+damageFlashComponent = NodePath("../DamageFlashComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+position = Vector2(-3, 3)
+shape = SubResource("CapsuleShape2D_0p85k")
+
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("3_uoy3u")
+
+[node name="DamageFlashComponent" type="Node2D" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("4_do3b2")
+sprite = NodePath("../AnimatedSprite2D")

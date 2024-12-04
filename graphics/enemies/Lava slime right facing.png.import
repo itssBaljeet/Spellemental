@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dh41cf354ceyd"
-path="res://.godot/imported/mana_bar.png-45c59084344bb2ceab58a8616260b4d2.ctex"
+uid="uid://b46b2f4getqys"
+path="res://.godot/imported/Lava slime right facing.png-439440a0ed5ac30938c5feeb04871f25.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/projectiles/mana_bar.png"
-dest_files=["res://.godot/imported/mana_bar.png-45c59084344bb2ceab58a8616260b4d2.ctex"]
+source_file="res://graphics/enemies/Lava slime right facing.png"
+dest_files=["res://.godot/imported/Lava slime right facing.png-439440a0ed5ac30938c5feeb04871f25.ctex"]
 
 [params]
 

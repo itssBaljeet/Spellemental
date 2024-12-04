@@ -1,6 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://rhydgtoe2sfo"]
+[gd_scene load_steps=24 format=3 uid="uid://rhydgtoe2sfo"]
 
+[ext_resource type="Script" path="res://scripts/health_potion.gd" id="1_i5eqi"]
 [ext_resource type="Texture2D" uid="uid://d4lybrcjphihd" path="res://graphics/objects/potion_health_sprite_frames.png" id="1_u2qba"]
+[ext_resource type="Script" path="res://components/HitboxComponent.gd" id="2_xg4bb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6w18g"]
 atlas = ExtResource("1_u2qba")
@@ -136,10 +138,11 @@ animations = [{
 "speed": 24.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_oo37l"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_o1sht"]
 radius = 7.0
 
-[node name="Node2D" type="Node2D"]
+[node name="HealthPotion" type="Node2D"]
+script = ExtResource("1_i5eqi")
 metadata/_edit_vertical_guides_ = [-27.0, -27.0]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -149,7 +152,12 @@ animation = &"new_animation"
 autoplay = "new_animation"
 frame_progress = 0.732583
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="HitBoxComponent" type="Area2D" parent="."]
+collision_layer = 16
+script = ExtResource("2_xg4bb")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_oo37l")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+scale = Vector2(1.00714, 1)
+shape = SubResource("CircleShape2D_o1sht")
+
+[connection signal="area_entered" from="HitBoxComponent" to="." method="_on_hit_box_component_area_entered"]

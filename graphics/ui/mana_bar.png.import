@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vubpsjy63hgd"
-path="res://.godot/imported/skeleton_sprite_frames.png-8304c8dcb97d93247e101b008602e51a.ctex"
+uid="uid://dh41cf354ceyd"
+path="res://.godot/imported/mana_bar.png-bd8aca58b27f12059d41e7e07425777e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/objects/Enemies/skeleton_sprite_frames.png"
-dest_files=["res://.godot/imported/skeleton_sprite_frames.png-8304c8dcb97d93247e101b008602e51a.ctex"]
+source_file="res://graphics/ui/mana_bar.png"
+dest_files=["res://.godot/imported/mana_bar.png-bd8aca58b27f12059d41e7e07425777e.ctex"]
 
 [params]
 

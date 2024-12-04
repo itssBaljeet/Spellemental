@@ -1,14 +1,18 @@
-[gd_scene load_steps=28 format=4 uid="uid://d0tb1mxtuihr"]
+[gd_scene load_steps=32 format=4 uid="uid://d0tb1mxtuihr"]
 
 [ext_resource type="PackedScene" uid="uid://do043bihp214l" path="res://scenes/levels/level.tscn" id="1_1k1nm"]
 [ext_resource type="Texture2D" uid="uid://brmt8sqp5ln72" path="res://graphics/tilemaps/basicGrass2.png" id="2_4j41g"]
-[ext_resource type="Script" path="res://scenes/levels/test_level.gd" id="2_iqfju"]
+[ext_resource type="Script" path="res://scripts/test_level.gd" id="2_iqfju"]
 [ext_resource type="PackedScene" uid="uid://c03tvi8gg1bqo" path="res://scenes/enemies/goblin.tscn" id="2_sq0sl"]
 [ext_resource type="PackedScene" uid="uid://8a7r4mtotqys" path="res://scenes/enemies/skeleton.tscn" id="3_3j1h7"]
 [ext_resource type="PackedScene" uid="uid://duhrstarj6obb" path="res://scenes/objects/wizardTower.tscn" id="3_crh2g"]
 [ext_resource type="Texture2D" uid="uid://b6mrjnedf48fh" path="res://graphics/tilemaps/water_sprite_sheet.png" id="5_sgtgg"]
 [ext_resource type="PackedScene" uid="uid://rhydgtoe2sfo" path="res://scenes/objects/health_potion.tscn" id="6_y7si8"]
 [ext_resource type="PackedScene" uid="uid://cn75iyt80e0v3" path="res://scenes/objects/coin.tscn" id="7_x11u4"]
+[ext_resource type="PackedScene" uid="uid://ip6hjyoc238i" path="res://scenes/enemies/green_slime.tscn" id="10_rgaga"]
+[ext_resource type="PackedScene" uid="uid://drijmwoyrfd1i" path="res://scenes/enemies/lava_slime.tscn" id="11_mwc5h"]
+[ext_resource type="PackedScene" uid="uid://dslv6lckf2evn" path="res://scenes/enemies/corrupt_slime.tscn" id="11_w12wh"]
+[ext_resource type="PackedScene" uid="uid://dtaxfaji43yb4" path="res://scenes/enemies/goblinBomber.tscn" id="13_hpst8"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_vbg7w"]
 polygon = PackedVector2Array(-2, -7, 1.99219, -7, 4, -4.99219, 3.99877, 5.99816, 2.98154, 6.99785, 2, 7, 2, 8, -2, 8, -2, 7, -2.98438, 7, -4, 5.98438, -3.99219, -4.99219)
@@ -308,6 +312,18 @@ position = Vector2(119, 0)
 z_index = 1
 position = Vector2(-130, 0)
 
+[node name="CorruptSlime" parent="Enemies" index="2" instance=ExtResource("11_w12wh")]
+position = Vector2(-61, -16)
+
+[node name="LavaSlime2" parent="Enemies" index="3" instance=ExtResource("11_mwc5h")]
+position = Vector2(71, -55)
+
+[node name="GreenSlime" parent="Enemies" index="4" instance=ExtResource("10_rgaga")]
+position = Vector2(-36, -56)
+
+[node name="GoblinBomber" parent="Enemies" index="5" instance=ExtResource("13_hpst8")]
+position = Vector2(68, -235)
+
 [node name="Player" parent="." index="5"]
 z_index = 1
 y_sort_enabled = true
@@ -323,3 +339,6 @@ metadata/_edit_group_ = true
 [connection signal="player_entered_door" from="Ground/Wizard Tower" to="." method="_on_wizard_tower_player_entered_door"]
 [connection signal="handpos" from="Player" to="Enemies/Skeleton" method="_on_player_handpos"]
 [connection signal="handpos" from="Player" to="Enemies/Goblin" method="_on_player_handpos"]
+[connection signal="handpos" from="Player" to="Enemies/CorruptSlime" method="_on_player_handpos"]
+[connection signal="handpos" from="Player" to="Enemies/LavaSlime2" method="_on_player_handpos"]
+[connection signal="handpos" from="Player" to="Enemies/GreenSlime" method="_on_player_handpos"]

@@ -1,23 +1,30 @@
-[gd_scene load_steps=13 format=3 uid="uid://do043bihp214l"]
+[gd_scene load_steps=24 format=3 uid="uid://do043bihp214l"]
 
-[ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_s1y56"]
+[ext_resource type="Script" path="res://scripts/level.gd" id="1_s1y56"]
 [ext_resource type="PackedScene" uid="uid://badk3r16foj3o" path="res://scenes/player/player.tscn" id="2_4wdr5"]
-[ext_resource type="Texture2D" uid="uid://djipoglyq4b2o" path="res://graphics/projectiles/health.png" id="4_0yloh"]
 [ext_resource type="PackedScene" uid="uid://bo63e7s60j085" path="res://scenes/player/hands.tscn" id="4_hegrm"]
-[ext_resource type="Texture2D" uid="uid://dh41cf354ceyd" path="res://graphics/projectiles/mana_bar.png" id="5_3rqgj"]
+[ext_resource type="Texture2D" uid="uid://cseqykyj400br" path="res://graphics/ui/full_heart.png" id="4_tc5tb"]
+[ext_resource type="Texture2D" uid="uid://dh41cf354ceyd" path="res://graphics/ui/mana_bar.png" id="5_3rqgj"]
 [ext_resource type="Texture2D" uid="uid://c1xonnvf60dlq" path="res://graphics/objects/coin_ui.png" id="6_8axj7"]
 [ext_resource type="Texture2D" uid="uid://cw6edov8q5dmw" path="res://graphics/ui/pause_menu.png" id="7_nngy3"]
+[ext_resource type="Texture2D" uid="uid://bk863gjixi5hy" path="res://graphics/ui/Play_Button1.png" id="8_kvm01"]
 [ext_resource type="Texture2D" uid="uid://f6ad6pdirqp7" path="res://graphics/ui/button.png" id="8_lmcpl"]
+[ext_resource type="Texture2D" uid="uid://blaqahx2m8c4m" path="res://graphics/ui/Play_Button2.png" id="9_14d36"]
 [ext_resource type="Texture2D" uid="uid://dhuv1e2fo8jlb" path="res://graphics/ui/button_pressed.png" id="9_jc230"]
 [ext_resource type="Texture2D" uid="uid://cjix8os68mg0f" path="res://graphics/ui/button_hover.png" id="10_bbp4f"]
+[ext_resource type="Texture2D" uid="uid://c7koqfssy3sah" path="res://graphics/ui/Play_Button3.png" id="10_dpgv3"]
+[ext_resource type="Texture2D" uid="uid://sx8mq5l27g58" path="res://graphics/ui/Save_button 2.png" id="11_i3qei"]
+[ext_resource type="Texture2D" uid="uid://b8axygj7yjuhr" path="res://graphics/ui/Save_button 3.png" id="12_bcr7l"]
+[ext_resource type="Texture2D" uid="uid://cnq52vv2rkvmf" path="res://graphics/ui/Save_button 4.png" id="13_yuo6k"]
+[ext_resource type="Texture2D" uid="uid://1bgw16aifyod" path="res://graphics/ui/Options_button1.png" id="14_xij4c"]
+[ext_resource type="Texture2D" uid="uid://cuatfgmp27tnc" path="res://graphics/ui/Options_button2.png" id="15_j2lkp"]
+[ext_resource type="Texture2D" uid="uid://602rxk28pshe" path="res://graphics/ui/Options_button3.png" id="16_waf4j"]
+[ext_resource type="Texture2D" uid="uid://nysjft63rhlg" path="res://graphics/ui/Sound_button1.png" id="17_3mhno"]
+[ext_resource type="Texture2D" uid="uid://c2rqgefqoidbe" path="res://graphics/ui/Sound_button2.png" id="18_2mp6r"]
+[ext_resource type="Texture2D" uid="uid://rqdhod3d1inv" path="res://graphics/ui/Sound_button3.png" id="19_p432t"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_vth0v"]
 font_size = 60
-
-[sub_resource type="LabelSettings" id="LabelSettings_6lhv8"]
-font_size = 23
-font_color = Color(0, 0, 0, 1)
-outline_size = 1
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_s1y56")
@@ -55,18 +62,37 @@ grow_vertical = 2
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/VBoxContainer/Player_Stats"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
 [node name="Hitpoints" type="BoxContainer" parent="UI/VBoxContainer/Player_Stats"]
-custom_minimum_size = Vector2(500, 0)
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 2
+alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="UI/VBoxContainer/Player_Stats/Hitpoints"]
+[node name="Heart0" type="TextureRect" parent="UI/VBoxContainer/Player_Stats/Hitpoints"]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("4_0yloh")
-expand_mode = 2
-stretch_mode = 6
+texture = ExtResource("4_tc5tb")
+stretch_mode = 5
+
+[node name="Heart1" type="TextureRect" parent="UI/VBoxContainer/Player_Stats/Hitpoints"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_tc5tb")
+stretch_mode = 5
+
+[node name="Heart2" type="TextureRect" parent="UI/VBoxContainer/Player_Stats/Hitpoints"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_tc5tb")
+stretch_mode = 5
 
 [node name="Mana_Bar" type="BoxContainer" parent="UI/VBoxContainer/Player_Stats"]
 custom_minimum_size = Vector2(500, 0)
@@ -155,35 +181,20 @@ custom_minimum_size = Vector2(240, 110)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture_normal = ExtResource("8_lmcpl")
-texture_pressed = ExtResource("9_jc230")
-texture_hover = ExtResource("10_bbp4f")
+texture_normal = ExtResource("8_kvm01")
+texture_pressed = ExtResource("10_dpgv3")
+texture_hover = ExtResource("9_14d36")
 ignore_texture_size = true
 stretch_mode = 0
-
-[node name="Label" type="Label" parent="PauseMenu/HBoxContainer/VBoxContainer2/TextureRect/Button_Holder/Resume Button"]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -11.5
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Resume"
-label_settings = SubResource("LabelSettings_6lhv8")
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="TextureButton2" type="TextureButton" parent="PauseMenu/HBoxContainer/VBoxContainer2/TextureRect/Button_Holder"]
 custom_minimum_size = Vector2(240, 110)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture_normal = ExtResource("8_lmcpl")
-texture_pressed = ExtResource("9_jc230")
-texture_hover = ExtResource("10_bbp4f")
+texture_normal = ExtResource("11_i3qei")
+texture_pressed = ExtResource("13_yuo6k")
+texture_hover = ExtResource("12_bcr7l")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -192,9 +203,9 @@ custom_minimum_size = Vector2(240, 110)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture_normal = ExtResource("8_lmcpl")
-texture_pressed = ExtResource("9_jc230")
-texture_hover = ExtResource("10_bbp4f")
+texture_normal = ExtResource("14_xij4c")
+texture_pressed = ExtResource("16_waf4j")
+texture_hover = ExtResource("15_j2lkp")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -203,9 +214,9 @@ custom_minimum_size = Vector2(240, 110)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture_normal = ExtResource("8_lmcpl")
-texture_pressed = ExtResource("9_jc230")
-texture_hover = ExtResource("10_bbp4f")
+texture_normal = ExtResource("17_3mhno")
+texture_pressed = ExtResource("19_p432t")
+texture_hover = ExtResource("18_2mp6r")
 ignore_texture_size = true
 stretch_mode = 0
 

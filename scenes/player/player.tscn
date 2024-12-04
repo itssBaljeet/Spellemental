@@ -1,8 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://badk3r16foj3o"]
+[gd_scene load_steps=17 format=3 uid="uid://badk3r16foj3o"]
 
-[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_0wla4"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_0wla4"]
 [ext_resource type="Texture2D" uid="uid://oy2fyqakiwf0" path="res://graphics/player/player_idle_sprite_frames.png" id="2_afrch"]
 [ext_resource type="Texture2D" uid="uid://cvbge54aoykpj" path="res://graphics/player/player_sprite_frames_proto.png" id="2_r6q4w"]
+[ext_resource type="Script" path="res://components/HealthComponent.gd" id="4_xf4so"]
+[ext_resource type="Script" path="res://components/HitboxComponent.gd" id="5_4k5pf"]
+[ext_resource type="Script" path="res://components/DamageFlashComponent.gd" id="6_7p1xp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ylcxi"]
 atlas = ExtResource("2_afrch")
@@ -76,9 +79,10 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2lal3"]
 size = Vector2(14, 14)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("healthComponent")]
 collision_mask = 15
 script = ExtResource("1_0wla4")
+healthComponent = NodePath("HealthComponent")
 
 [node name="Mage Walk_Run" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -97,5 +101,26 @@ wait_time = 0.25
 [node name="SecondSpellCooldown" type="Timer" parent="."]
 wait_time = 0.291
 
+[node name="HealthComponent" type="Node2D" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("4_xf4so")
+player = NodePath("..")
+MAX_HEALTH = 6.0
+
+[node name="HitBoxComponent" type="Area2D" parent="." node_paths=PackedStringArray("healthComponent", "damageFlashComponent")]
+collision_mask = 10
+script = ExtResource("5_4k5pf")
+healthComponent = NodePath("../HealthComponent")
+damageFlashComponent = NodePath("../DamageFlashComponent")
+isPlayer = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_2lal3")
+
+[node name="DamageFlashComponent" type="Node2D" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("6_7p1xp")
+sprite = NodePath("../Mage Walk_Run")
+
 [connection signal="timeout" from="DefaultSpellCooldown" to="." method="_on_default_spell_cooldown_timeout"]
 [connection signal="timeout" from="SecondSpellCooldown" to="." method="_on_second_spell_cooldown_timeout"]
+[connection signal="area_entered" from="HitBoxComponent" to="." method="_on_hit_box_component_area_entered"]

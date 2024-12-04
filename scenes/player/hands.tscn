@@ -1,16 +1,18 @@
 [gd_scene load_steps=4 format=3 uid="uid://bo63e7s60j085"]
 
-[ext_resource type="Script" path="res://scenes/player/hands.gd" id="1_2uyj3"]
+[ext_resource type="Script" path="res://scripts/hands.gd" id="1_2uyj3"]
 [ext_resource type="Texture2D" uid="uid://cfkk7tkxeckh0" path="res://graphics/player/hands.png" id="1_310fc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_prs0w"]
 size = Vector2(14, 5.75)
 
 [node name="Hands" type="Area2D"]
+z_index = 5
 script = ExtResource("1_2uyj3")
 
 [node name="Hands" type="Sprite2D" parent="."]
 texture_filter = 1
+position = Vector2(5, 0)
 rotation = -1.5708
 texture = ExtResource("1_310fc")
 

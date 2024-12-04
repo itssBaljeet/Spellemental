@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://duhrstarj6obb"]
 
 [ext_resource type="Texture2D" uid="uid://c5elxspndvtoa" path="res://graphics/objects/Wizard tower.png" id="1_0cci3"]
-[ext_resource type="Script" path="res://scenes/objects/wizardTower.gd" id="1_5v8sk"]
+[ext_resource type="Script" path="res://scripts/wizardTower.gd" id="1_5v8sk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_isieh"]
 size = Vector2(22, 18)

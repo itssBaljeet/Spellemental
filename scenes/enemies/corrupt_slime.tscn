@@ -1,0 +1,154 @@
+[gd_scene load_steps=20 format=3 uid="uid://dslv6lckf2evn"]
+
+[ext_resource type="Script" path="res://scripts/green_slime.gd" id="1_1q1k5"]
+[ext_resource type="Texture2D" uid="uid://cgx8ck1wq5cb8" path="res://graphics/enemies/Corrupt slime right facing.png" id="2_hw2gv"]
+[ext_resource type="Script" path="res://components/HitboxComponent.gd" id="3_e84v1"]
+[ext_resource type="Script" path="res://components/HealthComponent.gd" id="4_03t1w"]
+[ext_resource type="Script" path="res://components/DamageFlashComponent.gd" id="5_0rtie"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_523af"]
+atlas = ExtResource("2_hw2gv")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_selal"]
+atlas = ExtResource("2_hw2gv")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5gvs7"]
+atlas = ExtResource("2_hw2gv")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jhf42"]
+atlas = ExtResource("2_hw2gv")
+region = Rect2(0, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8mmk5"]
+atlas = ExtResource("2_hw2gv")
+region = Rect2(96, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mv2xc"]
+atlas = ExtResource("2_hw2gv")
+region = Rect2(192, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u01dd"]
+atlas = ExtResource("2_hw2gv")
+region = Rect2(0, 192, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ml71"]
+atlas = ExtResource("2_hw2gv")
+region = Rect2(96, 192, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_076gf"]
+atlas = ExtResource("2_hw2gv")
+region = Rect2(192, 192, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gycth"]
+atlas = ExtResource("2_hw2gv")
+region = Rect2(96, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71sj8"]
+atlas = ExtResource("2_hw2gv")
+region = Rect2(0, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ad2j"]
+atlas = ExtResource("2_hw2gv")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d57yw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_523af")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_selal")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5gvs7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jhf42")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8mmk5")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mv2xc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u01dd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ml71")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_076gf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gycth")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_71sj8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ad2j")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_snbi2"]
+radius = 22.0
+height = 88.0
+
+[node name="CorruptSlime" type="CharacterBody2D"]
+scale = Vector2(0.25, 0.25)
+script = ExtResource("1_1q1k5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_d57yw")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.876895
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 27)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_snbi2")
+
+[node name="JumpTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[node name="AirTimeTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="HitBoxComponent" type="Area2D" parent="." node_paths=PackedStringArray("healthComponent", "damageFlashComponent")]
+collision_layer = 2
+collision_mask = 9
+script = ExtResource("3_e84v1")
+healthComponent = NodePath("../HealthComponent")
+damageFlashComponent = NodePath("../DamageFlashComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+position = Vector2(0, 27)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_snbi2")
+
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("4_03t1w")
+
+[node name="DamageFlashComponent" type="Node2D" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("5_0rtie")
+flash_color = Color(0, 0, 0, 1)
+sprite = NodePath("../AnimatedSprite2D")
+
+[connection signal="timeout" from="JumpTimer" to="." method="_on_jump_timer_timeout"]
+[connection signal="timeout" from="AirTimeTimer" to="." method="_on_air_time_timer_timeout"]

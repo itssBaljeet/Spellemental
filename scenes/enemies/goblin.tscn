@@ -1,8 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://c03tvi8gg1bqo"]
+[gd_scene load_steps=19 format=3 uid="uid://c03tvi8gg1bqo"]
 
 [ext_resource type="Script" path="res://CharacterBody2D.gd" id="1_e550h"]
 [ext_resource type="Texture2D" uid="uid://c53y171jstvc3" path="res://graphics/enemies/goblin_idle_sprite_frames.png" id="2_24k74"]
 [ext_resource type="Texture2D" uid="uid://dcnyfs532a48l" path="res://graphics/enemies/goblin_run_sprite_frames.png" id="3_jmyo2"]
+[ext_resource type="Script" path="res://components/HitboxComponent.gd" id="4_jq83y"]
+[ext_resource type="Script" path="res://components/HealthComponent.gd" id="5_h26kn"]
+[ext_resource type="Script" path="res://components/DamageFlashComponent.gd" id="6_iwm5q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b3y4g"]
 atlas = ExtResource("2_24k74")
@@ -108,4 +111,25 @@ shape = SubResource("CapsuleShape2D_gcg21")
 wait_time = 3.0
 autostart = true
 
+[node name="HitBoxComponent" type="Area2D" parent="." node_paths=PackedStringArray("healthComponent", "damageFlashComponent")]
+collision_layer = 2
+collision_mask = 9
+script = ExtResource("4_jq83y")
+healthComponent = NodePath("../HealthComponent")
+damageFlashComponent = NodePath("../DamageFlashComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+shape = SubResource("CapsuleShape2D_gcg21")
+
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("5_h26kn")
+
+[node name="DamageFlashComponent" type="Node2D" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("6_iwm5q")
+sprite = NodePath("../AnimatedSprite2D")
+
+[node name="HitTimer" type="Timer" parent="."]
+
 [connection signal="timeout" from="Run_Walk" to="." method="_on_run_walk_timeout"]
+[connection signal="area_entered" from="HitBoxComponent" to="." method="_on_hit_box_component_area_entered"]
+[connection signal="timeout" from="HitTimer" to="." method="_on_hit_timer_timeout"]

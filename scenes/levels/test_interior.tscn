@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://b44cc5kb55v0o"]
 
 [ext_resource type="PackedScene" uid="uid://do043bihp214l" path="res://scenes/levels/level.tscn" id="1_u8f1i"]
-[ext_resource type="Script" path="res://scenes/levels/test_interior.gd" id="2_1v33u"]
+[ext_resource type="Script" path="res://scripts/test_interior.gd" id="2_1v33u"]
 [ext_resource type="Texture2D" uid="uid://dn6vy661jkyey" path="res://graphics/tilemaps/interior_map.png" id="2_r88go"]
 [ext_resource type="PackedScene" uid="uid://cn75iyt80e0v3" path="res://scenes/objects/coin.tscn" id="3_fccig"]
 
