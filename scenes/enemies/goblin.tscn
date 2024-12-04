@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://c03tvi8gg1bqo"]
 
-[ext_resource type="Script" path="res://CharacterBody2D.gd" id="1_e550h"]
+[ext_resource type="Script" path="res://scripts/CharacterBody2D.gd" id="1_xp8mp"]
 [ext_resource type="Texture2D" uid="uid://c53y171jstvc3" path="res://graphics/enemies/goblin_idle_sprite_frames.png" id="2_24k74"]
 [ext_resource type="Texture2D" uid="uid://dcnyfs532a48l" path="res://graphics/enemies/goblin_run_sprite_frames.png" id="3_jmyo2"]
 [ext_resource type="Script" path="res://components/HitboxComponent.gd" id="4_jq83y"]
@@ -95,7 +95,7 @@ radius = 3.0
 height = 12.0
 
 [node name="Goblin" type="CharacterBody2D"]
-script = ExtResource("1_e550h")
+script = ExtResource("1_xp8mp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

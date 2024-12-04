@@ -11,9 +11,9 @@ var markPos: Vector2
 var coin_count: int = 0
 var heartList : Array[Variant]
 @onready var hitPointList : BoxContainer = %Hitpoints
-@onready var fullHeart : CompressedTexture2D = preload("res://graphics/player/full_heart.png")
-@onready var halfHeart : CompressedTexture2D = preload("res://graphics/player/half_heart.png")
-@onready var emptyHeart : CompressedTexture2D = preload("res://graphics/player/empty_heart.png")
+@onready var fullHeart : CompressedTexture2D = preload("res://graphics/ui/full_heart.png")
+@onready var halfHeart : CompressedTexture2D = preload("res://graphics/ui/half_heart.png")
+@onready var emptyHeart : CompressedTexture2D = preload("res://graphics/ui/empty_heart.png")
 @export var healthComponent : HealthComponent
 
 func _ready() -> void:
